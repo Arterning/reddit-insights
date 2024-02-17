@@ -1,0 +1,84 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Note {
+  id        String   @id @default(uuid())
+  userId    String
+  title     String
+  body      String
+  type      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Project {
+  id        String           @id @default(uuid())
+  userId    String
+  name      String
+  url       String
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+  comments  ProjectComment[]
+}
+
+model ProjectComment {
+  id        String   @id @default(uuid())
+  projectId String
+  body      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  project   Project  @relation(fields: [projectId], references: [id])
+}
+
+model CodeSnippet {
+  id        String               @id @default(uuid())
+  userId    String
+  title     String?
+  body      String?
+  language  String?
+  createdAt DateTime             @default(now())
+  updatedAt DateTime             @updatedAt
+  comments  CodeSnippetComment[]
+}
+
+model CodeSnippetComment {
+  id            String      @id @default(uuid())
+  codeSnippetId String
+  body          String
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  codeSnippet   CodeSnippet @relation(fields: [codeSnippetId], references: [id])
+}
+
+model UserApiLimit {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  count     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model UserSubscription {
+  id                     String    @id @default(cuid())
+  userId                 String    @unique
+  stripeCustomerId       String?   @unique @map("stripe_customer_id")
+  stripeSubscriptionId   String?   @unique @map("stripe_subscription_id")
+  stripePriceId          String?   @map("stripe_price_id")
+  stripeCurrentPeriodEnd DateTime? @map("stripe_current_period_end")
+}
+
+model StarDict {
+  id          String     @id @default(uuid())
+  word        String  
+  definition  String?
+  translation String?
+  tag         String?
+  frq         Int?
+  detail      String?
+}

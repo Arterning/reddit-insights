@@ -38,6 +38,9 @@ export const LanguageModal = () => {
         } finally {
             setLoading(false);
             langModal.onClose();
+
+            //refresh page
+            window.location.reload();
         }
     }
 

@@ -11,7 +11,11 @@ export async function GET(
   //   return new NextResponse("Unauthorized", { status: 401 });
   // }
 
-  const data = await prismadb.starDict.findMany();
+  const data = await prismadb.starDict.findMany({
+    orderBy: {
+      createdAt: 'desc'
+    }
+  });
 
   return NextResponse.json(data);
 };

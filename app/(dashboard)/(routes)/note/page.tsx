@@ -7,6 +7,7 @@ import React from "react";
 import Pagination from "@/components/pagination";
 import SearchField from "@/components/search";
 import {Input} from "../../../../components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 
 
 const NotePage = async ({ searchParams }) => {
@@ -25,11 +26,11 @@ const NotePage = async ({ searchParams }) => {
                 iconColor="text-green-700"
                 bgColor="bg-green-700/10"
             />
-            <div className="max-w-2xl flex p-4 sm:p-6 lg:p-8">
+            <div className="max-w-2xl p-4 sm:p-6 lg:p-8">
                 <div className="bg-white shadow-sm rounded-lg">
-                    <form action={createNote}>
+                    <form action={createNote} className="space-y-3">
                         <Input name="title" placeholder={"title"} className={"p-3"}/>
-                        <textarea
+                        <Textarea
                             name="body"
                             placeholder="What's on your mind?"
                             className="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
@@ -42,7 +43,6 @@ const NotePage = async ({ searchParams }) => {
                     <SearchField placeholder="Search for a chirps..." />
                     {notes.map(note =>
                         <Chirp key={note.id} chirp={note} />
-                        // <p  key={note.id} className="mt-4 text-lg text-gray-900">{note.body}</p>
                     )}
                     <Pagination count={count}/>
                 </div>

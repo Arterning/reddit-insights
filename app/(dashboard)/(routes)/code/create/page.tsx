@@ -6,9 +6,10 @@ import {Button} from "@/components/ui/button";
 import {useState} from "react";
 
 
-const CodeSnippetPage = () => {
+const CreateSnippetPage = ({ params }) => {
 
     const [editorCode, setEditorCode] = useState<string>(``);
+    const [title, setTitle] = useState<string>("");
     const [language, setLanguage] = useState("javascript");
 
     function handleEditorChange(value: string, event: any) {
@@ -39,12 +40,15 @@ const CodeSnippetPage = () => {
                     <input
                         type="text"
                         name={"title"}
+                        onChange={(e) => setTitle(e.target.value)}
+                        value={title}
                         className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent"
                         placeholder="Title of code snippet."
                     />
                     <input
                         type="text"
                         name={"language"}
+                        value={language}
                         onChange={(e) => setLanguage(e.target.value)}
                         className={"border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent"}
                         placeholder="Language of code snippet."
@@ -65,4 +69,4 @@ const CodeSnippetPage = () => {
 
 }
 
-export default CodeSnippetPage
+export default CreateSnippetPage

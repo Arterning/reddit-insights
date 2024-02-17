@@ -3,7 +3,7 @@ import { Heading } from "@/components/heading";
 import {Button} from "@/components/ui/button";
 import Link from "next/link";
 import {getCodeSnippets} from "@/app/action/code";
-import {CodeList} from "@/app/(dashboard)/(routes)/code/code-list";
+import {CodeCardView} from "@/app/(dashboard)/(routes)/code/_components/code-card-view";
 
 
 const CodePage = async () => {
@@ -24,7 +24,7 @@ const CodePage = async () => {
                 <Button>Create New</Button>
             </Link>
 
-            <CodeList codes={codes} />
+            <CodeCardView codes={codes} />
       </div>
     </div>
    );

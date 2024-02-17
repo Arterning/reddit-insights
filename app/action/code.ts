@@ -28,3 +28,27 @@ export const getCodeSnippets = async () => {
         }
     })
 }
+
+export const getCodeSnippet = async (id: string) => {
+    return await prisma.codeSnippet.findUnique({
+        where: {
+            id
+        }
+    })
+}
+
+export const updateCodeSnippet = async (formData) => {
+
+    const { id, title, body, language } = Object.fromEntries(formData);
+
+    await prisma.codeSnippet.update({
+        where: {
+            id
+        },
+        data: {
+            title,
+            body,
+            language
+        }
+    })
+}

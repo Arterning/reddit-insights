@@ -1,4 +1,5 @@
 "use client";
+import { Badge } from "@/components/ui/badge";
 import {
   Card,
   CardContent,
@@ -22,12 +23,12 @@ export const CodeCardView = ({ codes }: CodeCardViewProps) => {
         <div key={code.id}>
           <Card>
             <CardHeader>
-              <CardTitle>
+              <CardDescription>
                 <Link href={`/code/${code.id}`}>{code.title || 'Unnamed'}</Link>
-              </CardTitle>
+              </CardDescription>
             </CardHeader>
             <CardFooter>
-              <p>{code.language}</p>
+              <Badge>{code.language}</Badge>
             </CardFooter>
           </Card>
         </div>

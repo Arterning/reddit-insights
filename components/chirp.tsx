@@ -26,7 +26,7 @@ export default function Chirp({ chirp }) {
     setIsDeleted(true);
   };
 
-  const updateChirp = async (e: Event) => {
+  const updateChirp = async (e) => {
     e.preventDefault();
     try {
       await axios.put(`/api/note/${chirp.id}`, {
@@ -101,7 +101,7 @@ export default function Chirp({ chirp }) {
               </Button>
             </div>
           </div>
-          <p className="mt-4 text-lg text-gray-900">{body}</p>
+          <pre className="mt-4 text-lg text-gray-900 whitespace-pre-wrap font-semibold">{body}</pre>
         </div>
       )}
     </div>

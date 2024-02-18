@@ -13,10 +13,18 @@ import {
 import {useCodeCardModal} from "@/hooks/use-code-card-modal";
 import { Editor } from "@monaco-editor/react";
 import {CopyBlock, dracula} from "react-code-blocks";
+import { Button } from "./ui/button";
+import { Zap } from "lucide-react";
+import toast from "react-hot-toast";
 
 export const CodeCardModal = () => {
 
     const codeCardModal = useCodeCardModal();
+
+    const handleOnClick = (body) => {
+        navigator.clipboard.writeText(body);
+        toast.success("Code copied to clipboard");
+      };
 
     return (
         <Dialog open={codeCardModal.isOpen} onOpenChange={codeCardModal.onClose}>
@@ -34,6 +42,12 @@ export const CodeCardModal = () => {
                         />
                     </DialogDescription>
                 </DialogHeader>
+                <DialogFooter>
+                <Button size="lg" variant="premium" className="w-full" onClick={() => handleOnClick(codeCardModal.code.body)}>
+                        Copy
+                        <Zap className="w-4 h-4 ml-2 fill-white" />
+                </Button>
+                </DialogFooter>
             </DialogContent>
         </Dialog>
     )

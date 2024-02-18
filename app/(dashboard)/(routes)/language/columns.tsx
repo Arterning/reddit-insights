@@ -8,15 +8,15 @@ export const columns: ColumnDef<StarDict>[] = [
         header: "Word",
     },
     {
-        accessorKey: "definition",
-        header: "Definition",
-    },
-    {
         accessorKey: "translation",
         header: "Translation",
     },
-    {
-        accessorKey: "frq",
-        header: "frequency",
-    }
+    // {
+    //     accessorKey: "definition",
+    //     header: "Definition",
+    // },
+    // {
+    //     accessorKey: "frq",
+    //     header: "frequency",
+    // }
 ]

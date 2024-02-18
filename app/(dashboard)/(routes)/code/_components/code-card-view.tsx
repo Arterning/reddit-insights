@@ -24,9 +24,6 @@ export const CodeCardView = ({ codes }: CodeCardViewProps) => {
   const handleOnClick = (code: Record<string, any>) => {
     codeCardModal.setCode(code);
     codeCardModal.onOpen();
-
-    navigator.clipboard.writeText(code.body);
-    toast.success("Code copied to clipboard");
   };
 
   return (

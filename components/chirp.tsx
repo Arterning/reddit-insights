@@ -26,11 +26,12 @@ export default function Chirp({ chirp }) {
     setIsDeleted(true);
   };
 
-  const updateChirp = async () => {
+  const updateChirp = async (e: Event) => {
+    e.preventDefault();
     try {
       await axios.put(`/api/note/${chirp.id}`, {
-        title: chirp.title,
-        body: chirp.body,
+        title,
+        body,
       });
     } catch (error) {
       toast.error("Something went wrong");
@@ -88,9 +89,9 @@ export default function Chirp({ chirp }) {
         <div className="flex-1">
           <div className="flex justify-between items-center">
             <div>
-              <span className="text-gray-800">{chirp.userId}</span>
+              <span className="text-gray-800">ArterNing</span>
               <small className="ml-2 text-sm text-gray-600">
-                {chirp.title}
+                {title}
               </small>
             </div>
             <div>
@@ -100,7 +101,7 @@ export default function Chirp({ chirp }) {
               </Button>
             </div>
           </div>
-          <p className="mt-4 text-lg text-gray-900">{chirp.body}</p>
+          <p className="mt-4 text-lg text-gray-900">{body}</p>
         </div>
       )}
     </div>

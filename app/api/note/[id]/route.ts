@@ -24,13 +24,16 @@ export async function PUT(
     //get the [id]
     const { id } = params;
 
+    //get the data
+    const data = await req.json();
+
 
     await prismadb.note.update({
         where: {
             id
         },
         data: {
-            ...req.body
+            ...data
         }
     })
 

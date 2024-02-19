@@ -1,5 +1,6 @@
 "use client";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -30,13 +31,14 @@ export const CodeCardView = ({ codes }: CodeCardViewProps) => {
     <div className={"flex flex-row gap-3 p-2"}>
       {codes.map((code) => (
         <div key={code.id}>
-          <Card onClick={() => handleOnClick(code)} className="cursor-pointer">
+          <Card className="cursor-pointer">
             <CardHeader>
               <CardDescription>{code.title || "Unnamed"}</CardDescription>
             </CardHeader>
-            <CardFooter className="flex justify-start items-center gap-3">
+            <CardFooter className="flex justify-center items-center gap-3">
               <Link href={`/code/${code.id}`} className="text-sm">Edit</Link>
-              <Badge>{code.language}</Badge>
+              <Button variant="link" onClick={() => handleOnClick(code)}>View</Button>
+              <Badge>{code.language || "Unknown"}</Badge>
             </CardFooter>
           </Card>
         </div>

@@ -26,12 +26,14 @@ const NotePage = async ({ searchParams }) => {
                 iconColor="text-green-700"
                 bgColor="bg-green-700/10"
             />
-            <div className="max-w-2xl p-4 sm:p-6 lg:p-8">
-                <div className="bg-white shadow-sm rounded-lg">
+            <div className="w-full p-4 sm:p-6 lg:p-8 flex gap-5">
+                
+                <div className="bg-white shadow-sm rounded-lg flex-1 max-w-lg">
                     <form action={createNote} className="space-y-3">
                         <Input name="title" placeholder={"title"} className={"p-3"}/>
                         <Textarea
                             name="body"
+                            rows={35}
                             placeholder="What's on your mind?"
                             className="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
                         />
@@ -39,7 +41,7 @@ const NotePage = async ({ searchParams }) => {
                     </form>
                 </div>
 
-                <div className="bg-white shadow-sm rounded-lg divide-y">
+                <div className="bg-white shadow-sm rounded-lg divide-y flex-1">
                     <SearchField placeholder="Search for a chirps..." />
                     {notes.map(note =>
                         <Chirp key={note.id} chirp={note} />

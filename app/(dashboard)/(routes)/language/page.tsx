@@ -61,7 +61,7 @@ const LanguagePage = () => {
                 description="Translate language with local data."
                 icon={Languages}
                 iconColor="text-red-500"
-                bgColor="bg-green-700/10"
+                bgColor="bg-red-700/10"
             />
 
 

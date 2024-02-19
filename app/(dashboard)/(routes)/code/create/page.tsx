@@ -1,27 +1,33 @@
-'use client'
+"use client";
 
-import {createCodeSnippet} from "@/app/action/code";
+import { createCodeSnippet } from "@/app/action/code";
 import Editor from "@monaco-editor/react";
-import {Button} from "@/components/ui/button";
-import {useState} from "react";
-
+import { Button } from "@/components/ui/button";
+import { useState } from "react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Input } from "@/components/ui/input";
 
 const CreateSnippetPage = ({ params }) => {
+  const [editorCode, setEditorCode] = useState<string>(``);
+  const [title, setTitle] = useState<string>("");
+  const [language, setLanguage] = useState("javascript");
 
-    const [editorCode, setEditorCode] = useState<string>(``);
-    const [title, setTitle] = useState<string>("");
-    const [language, setLanguage] = useState("javascript");
+  function handleEditorChange(value: string, event: any) {
+    setEditorCode(value);
+  }
 
-    function handleEditorChange(value: string, event: any) {
-        setEditorCode(value);
-    }
-
-    return (
-        <div className="px-4 lg:px-8">
-            <div>
-                <form
-                    action={createCodeSnippet}
-                    className="
+  return (
+    <div className="px-4 lg:px-8">
+      <div>
+        <form
+          action={createCodeSnippet}
+          className="
                             rounded-lg
                             border
                             w-full
@@ -30,43 +36,53 @@ const CreateSnippetPage = ({ params }) => {
                             md:px-6
                             focus-within:shadow-sm
                             "
-                >
-                    <Editor
-                        height="500px"
-                        language={language}
-                        theme="vs-dark"
-                        onChange={handleEditorChange}
-                    />
-                    <input
-                        type="text"
-                        name={"title"}
-                        onChange={(e) => setTitle(e.target.value)}
-                        value={title}
-                        className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent"
-                        placeholder="Title of code snippet."
-                    />
-                    <input
-                        type="text"
-                        name={"language"}
-                        value={language}
-                        onChange={(e) => setLanguage(e.target.value)}
-                        className={"border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent"}
-                        placeholder="Language of code snippet."
-                    />
-                    {/*代码需要换行 所以我们必须使用textarea*/}
-                    <textarea
-                        name={"body"}
-                        value={editorCode}
-                        className={"hidden"}
-                    />
-                    <Button className="w-full py-2 mt-5" type="submit" size="icon">
-                        Save
-                    </Button>
-                </form>
-            </div>
-        </div>
-    )
+        >
+          <Editor
+            height="500px"
+            language={language}
+            theme="vs-dark"
+            onChange={handleEditorChange}
+          />
+          <div className="flex gap-3">
+            <Select value={language} onValueChange={setLanguage}>
+              <SelectTrigger className="mt-4 w-[180px] flex-2">
+                <SelectValue placeholder="Select language" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="javascript">JavaScript</SelectItem>
+                <SelectItem value="python">Python</SelectItem>
+                <SelectItem value="php">PHP</SelectItem>
+                <SelectItem value="c++">C++</SelectItem>
+                <SelectItem value="c#">C#</SelectItem>
+                <SelectItem value="go">Go</SelectItem>
+                <SelectItem value="rust">Rust</SelectItem>
+                <SelectItem value="kotlin">Kotlin</SelectItem>
+                <SelectItem value="swift">Swift</SelectItem>
+                <SelectItem value="ruby">Ruby</SelectItem>
+                <SelectItem value="scala">Scala</SelectItem>
+                <SelectItem value="java">Java</SelectItem>
+                <SelectItem value="bash">Bash</SelectItem>
+              </SelectContent>
+            </Select>
+            <Input
+              name={"title"}
+              value={title}
+              className="mt-4 flex-2"
+              onChange={(e) => setTitle(e.target.value)}
+              placeholder="Title of code snippet."
+            ></Input>
+            {/*代码需要换行 所以我们必须使用textarea*/}
+            <textarea name={"body"} value={editorCode} className={"hidden"} />
+          </div>
 
-}
+          <Button className="w-full py-2 mt-5" type="submit" size="icon">
+            Save
+          </Button>
 
-export default CreateSnippetPage
+        </form>
+      </div>
+    </div>
+  );
+};
+
+export default CreateSnippetPage;

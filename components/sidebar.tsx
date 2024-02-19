@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Montserrat } from 'next/font/google'
-import { Code, LayoutDashboard, StickyNote, Languages, Settings } from "lucide-react";
+import { Code, LayoutDashboard, StickyNote, Languages, Edit3Icon,  Settings, IceCream2Icon } from "lucide-react";
 import { usePathname } from "next/navigation";
 
 import { cn } from "@/lib/utils";
@@ -25,6 +25,12 @@ const routes = [
     href: '/note',
   },
   {
+    label: 'Rich Text',
+    icon: Edit3Icon,
+    color: "text-indigo-500",
+    href: '/rich-text',
+  },
+  {
     label: 'Code',
     icon: Code,
     color: "text-yellow-500",
@@ -35,6 +41,12 @@ const routes = [
     icon: Languages,
     color: "text-red-500",
     href: '/language',
+  },
+  {
+    label: 'Test Api',
+    icon: IceCream2Icon,
+    color: "text-pink-500",
+    href: '/test-api',
   },
   {
     label: 'Settings',

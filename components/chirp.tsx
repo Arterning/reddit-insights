@@ -64,6 +64,12 @@ export default function Chirp({ chirp }) {
       {editing ? (
         <div className="flex-1">
           <form className="space-y-3">
+            <div className="flex justify-between items-center">
+              <Button size="sm" type={"submit"} onClick={updateChirp}>
+                Update
+              </Button>
+              <Button variant="link" onClick={() => setEditing(false)}>Cancel</Button>
+            </div>
             <Input
               name="title"
               placeholder={"title"}
@@ -74,15 +80,10 @@ export default function Chirp({ chirp }) {
             <Textarea
               name="body"
               value={body}
+              className="h-60"
               placeholder="What's on your mind?"
               onChange={(e) => setBody(e.target.value)}
             />
-            <div className="flex justify-between items-center">
-              <Button type={"submit"} onClick={updateChirp}>
-                Update
-              </Button>
-              <Button onClick={() => setEditing(false)}>Cancel</Button>
-            </div>
           </form>
         </div>
       ) : (
@@ -90,18 +91,25 @@ export default function Chirp({ chirp }) {
           <div className="flex justify-between items-center">
             <div>
               <span className="text-gray-800">ArterNing</span>
-              <small className="ml-2 text-sm text-gray-600">
-                {title}
-              </small>
+              <small className="ml-2 text-sm text-gray-600">{title}</small>
+              <Button
+                size="sm"
+                variant="link"
+                onClick={() => setEditing(true)}
+                className="ml-3"
+              >
+                Edit
+              </Button>
             </div>
             <div>
-              <Button onClick={() => setEditing(true)}>Edit</Button>
-              <Button variant="destructive" onClick={deleteChirp}>
+              <Button size="sm" variant="destructive" onClick={deleteChirp}>
                 Delete
               </Button>
             </div>
           </div>
-          <pre className="mt-4 text-lg text-gray-900 whitespace-pre-wrap font-semibold">{body}</pre>
+          <pre className="mt-4 text-lg text-gray-900 whitespace-pre-wrap font-semibold">
+            {body}
+          </pre>
         </div>
       )}
     </div>

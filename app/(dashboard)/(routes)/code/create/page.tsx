@@ -44,7 +44,7 @@ const CreateSnippetPage = ({ params }) => {
             onChange={handleEditorChange}
           />
           <div className="flex gap-3">
-            <Select value={language} onValueChange={setLanguage}>
+            <Select name="language" value={language} onValueChange={setLanguage}>
               <SelectTrigger className="mt-4 w-[180px] flex-2">
                 <SelectValue placeholder="Select language" />
               </SelectTrigger>

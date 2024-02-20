@@ -28,7 +28,7 @@ export const CodeCardView = ({ codes }: CodeCardViewProps) => {
   };
 
   return (
-    <div className={"flex flex-row gap-3 p-2"}>
+    <div className={"flex flex-row flex-wrap max-w-[1200px] gap-3 p-2"}>
       {codes.map((code) => (
         <div key={code.id}>
           <Card className="cursor-pointer">

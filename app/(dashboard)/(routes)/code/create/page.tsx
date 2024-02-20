@@ -62,6 +62,8 @@ const CreateSnippetPage = ({ params }) => {
                 <SelectItem value="scala">Scala</SelectItem>
                 <SelectItem value="java">Java</SelectItem>
                 <SelectItem value="bash">Bash</SelectItem>
+                <SelectItem value="sql">SQL</SelectItem>
+                <SelectItem value="html">HTML</SelectItem>
               </SelectContent>
             </Select>
             <Input

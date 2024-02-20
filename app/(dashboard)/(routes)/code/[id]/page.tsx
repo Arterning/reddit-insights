@@ -28,8 +28,17 @@ const SingleCodeSnippetPage = ({ params }) => {
     }
   }
 
+  /**
+   * 这里发现一个很诡异的问题，
+   * 如果data.language不存在，只会保存一部分状态，导致数据丢失
+   */
   useEffect(() => {
-    fetchData().then(setCode);
+    fetchData().then((data) => {
+      setCode({
+        ...data,
+        language: data.language || "javascript",
+      });
+    });
   }, []);
 
   function handleEditorChange(value: string, event: any) {
@@ -47,6 +56,7 @@ const SingleCodeSnippetPage = ({ params }) => {
           onSubmit={async (e) => {
             e.preventDefault();
             try {
+
               await axios.put(`/api/code`, {
                 id: code.id,
                 title: code.title,
@@ -55,6 +65,7 @@ const SingleCodeSnippetPage = ({ params }) => {
               });
             } catch (error) {
               toast.error("Something went wrong");
+              return;
             }
 
             toast.success("Code snippet updated");
@@ -73,7 +84,7 @@ const SingleCodeSnippetPage = ({ params }) => {
           />
           <div className="flex gap-3">
             {/*TODO - How to get the value from the Select component */}
-            <Select name="language" value={code.language}>
+            <Select name="language" value={code.language} onValueChange={(value) => setCode({ ...code, language: value })}>
               <SelectTrigger className="mt-4 w-[180px] flex-2">
                 <SelectValue placeholder="Select language"/>
               </SelectTrigger>
@@ -91,6 +102,8 @@ const SingleCodeSnippetPage = ({ params }) => {
                 <SelectItem value="scala">Scala</SelectItem>
                 <SelectItem value="java">Java</SelectItem>
                 <SelectItem value="bash">Bash</SelectItem>
+                <SelectItem value="sql">SQL</SelectItem>
+                <SelectItem value="html">HTML</SelectItem>
               </SelectContent>
             </Select>
             <Input

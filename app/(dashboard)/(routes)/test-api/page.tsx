@@ -7,7 +7,7 @@ const SendApiRequestPage = () => {
     return (
         <div>
             <Heading
-                title="Send Api Request"
+                title="Send API Request"
                 description="Manage Api Request with local data."
                 icon={IceCream2Icon}
                 iconColor="text-pink-500"

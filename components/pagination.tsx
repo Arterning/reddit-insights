@@ -32,7 +32,7 @@ const Pagination = ({ count }) => {
     const pageNums = Array.from({ length: Math.ceil(count / ITEM_PER_PAGE) }, (_, i) => i + 1);
 
     return (
-        <div className="p-10 flex justify-between">
+        <div className={"p-10 flex justify-between"}>
             <button
                 className={cn("px-5 py-10", hasPrev ? "cursor-pointer" : "cursor-not-allowed")}
                 disabled={!hasPrev}

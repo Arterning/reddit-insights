@@ -8,7 +8,7 @@ function RichTextPage() {
   return (
     <div>
       <Heading
-        title="RichText"
+        title="Text"
         description="Rich text editor powered by genius editor."
         icon={Edit3Icon}
         iconColor="indigo-500"

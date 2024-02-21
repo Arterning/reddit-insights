@@ -25,7 +25,7 @@ const routes = [
     href: '/note',
   },
   {
-    label: 'Rich Text',
+    label: 'Text',
     icon: Edit3Icon,
     color: "text-indigo-500",
     href: '/rich-text',
@@ -43,7 +43,7 @@ const routes = [
     href: '/language',
   },
   {
-    label: 'Test Api',
+    label: 'API',
     icon: IceCream2Icon,
     color: "text-pink-500",
     href: '/test-api',

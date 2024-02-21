@@ -21,12 +21,51 @@ export const createCodeSnippet = async (formData) => {
 }
 
 
-export const getCodeSnippets = async () => {
-    return await prisma.codeSnippet.findMany({
+export const getCodeSnippets = async (q: string, page: any, language: string) => {
+    const data = await prisma.codeSnippet.findMany({
+        where: {
+            OR: [
+                {
+                    title: {
+                        contains: q
+                    },
+                    body: {
+                        contains: q
+                    }
+                }
+            ],
+            language: language
+        },
         orderBy: {
             createdAt: 'desc'
+        },
+        take: 10,
+        skip: (page - 1) * 10 || 0,
+    })
+
+    const count = await prisma.codeSnippet.count({
+        where: {
+            OR: [
+                {
+                    title: {
+                        contains: q
+                    },
+                    body: {
+                        contains: q
+                    }
+                }
+            ]
+        }
+    });
+
+    const lang = await prisma.codeSnippet.groupBy({
+        by: ['language'],
+        _count: {
+            language: true
         }
     })
+
+    return {data, count, lang}
 }
 
 export const getCodeSnippet = async (id: string) => {

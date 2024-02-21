@@ -56,7 +56,6 @@ const SingleCodeSnippetPage = ({ params }) => {
           onSubmit={async (e) => {
             e.preventDefault();
             try {
-
               await axios.put(`/api/code`, {
                 id: code.id,
                 title: code.title,
@@ -84,9 +83,13 @@ const SingleCodeSnippetPage = ({ params }) => {
           />
           <div className="flex gap-3">
             {/*TODO - How to get the value from the Select component */}
-            <Select name="language" value={code.language} onValueChange={(value) => setCode({ ...code, language: value })}>
+            <Select
+              name="language"
+              value={code.language}
+              onValueChange={(value) => setCode({ ...code, language: value })}
+            >
               <SelectTrigger className="mt-4 w-[180px] flex-2">
-                <SelectValue placeholder="Select language"/>
+                <SelectValue placeholder="Select language" />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="javascript">JavaScript</SelectItem>
@@ -116,9 +119,30 @@ const SingleCodeSnippetPage = ({ params }) => {
             {/*代码需要换行 所以我们必须使用textarea*/}
             <textarea name={"body"} value={code.body} className={"hidden"} />
           </div>
-          <Button className="w-full py-2 mt-5" type="submit" size="icon">
-            Save
-          </Button>
+          <div className="flex gap-3">
+            <Button className="flex-1 py-2 mt-5" type="submit" size="icon">
+              Save
+            </Button>
+            <Button
+              className="flex-1 py-2 mt-5"
+              type="button"
+              size="icon"
+              variant="destructive"
+              onClick={async () => {
+                try {
+                  await axios.delete(`/api/code`, { params: { id } });
+                } catch (error) {
+                  toast.error("Something went wrong");
+                  return;
+                }
+                toast.success("Code snippet deleted");
+                //go to home page
+                window.location.href = "/code";
+              }}
+            >
+              Delete
+            </Button>
+          </div>
         </form>
       </div>
     </div>

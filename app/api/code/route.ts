@@ -19,6 +19,27 @@ export async function GET(req: Request) {
     return NextResponse.json(data);
 }
 
+//delete code
+export async function DELETE(req: Request) {
+
+    const { searchParams } = new URL(req.url);
+    const id = searchParams.get("id");
+
+    if (!id) {
+        return new Response("Missing id", { status: 400 });
+    }
+
+    await prismadb.codeSnippet.delete({
+        where: {
+            id
+        }
+    })
+
+    return NextResponse.json({
+        id
+    });
+}
+
 //update code
 export async function PUT(req: Request) {
 

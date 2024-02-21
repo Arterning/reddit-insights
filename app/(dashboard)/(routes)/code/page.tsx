@@ -11,8 +11,9 @@ const CodePage = async ({ searchParams }) => {
   const q = searchParams?.q || "";
   const page = searchParams?.page || 1;
   const language = searchParams?.language;
+  const pageSize = 15;
 
-  const { data: codes, count, lang } = await getCodeSnippets(q, page, language);
+  const { data: codes, count, lang } = await getCodeSnippets(q, page, pageSize, language);
 
   return (
     <div>
@@ -38,7 +39,7 @@ const CodePage = async ({ searchParams }) => {
         <CodeCardView codes={codes} />
 
         <div className="max-w-[1200px]">
-          <Pagination count={count} />
+          <Pagination count={count} pageSize={pageSize}/>
         </div>
       </div>
     </div>

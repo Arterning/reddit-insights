@@ -3,7 +3,10 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import {cn} from "@/lib/utils";
 
-const Pagination = ({ count }) => {
+const Pagination = ({ count, pageSize } : {
+    count: number,
+    pageSize?: number
+}) => {
     const searchParams = useSearchParams();
     const { replace } = useRouter();
     const pathname = usePathname();
@@ -12,7 +15,7 @@ const Pagination = ({ count }) => {
 
     // @ts-ignore
     const params = new URLSearchParams(searchParams);
-    const ITEM_PER_PAGE = 10;
+    const ITEM_PER_PAGE = pageSize || 10;
 
     const hasPrev = ITEM_PER_PAGE * (parseInt(page) - 1) > 0;
     const hasNext = ITEM_PER_PAGE * (parseInt(page) - 1) + ITEM_PER_PAGE < count;

@@ -21,7 +21,7 @@ export const createCodeSnippet = async (formData) => {
 }
 
 
-export const getCodeSnippets = async (q: string, page: any, language: string) => {
+export const getCodeSnippets = async (q: string, page: number, pageSize: number, language: string) => {
     const data = await prisma.codeSnippet.findMany({
         where: {
             OR: [
@@ -39,7 +39,7 @@ export const getCodeSnippets = async (q: string, page: any, language: string) =>
         orderBy: {
             createdAt: 'desc'
         },
-        take: 10,
+        take: pageSize || 10,
         skip: (page - 1) * 10 || 0,
     })
 

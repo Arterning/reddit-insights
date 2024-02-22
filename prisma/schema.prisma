@@ -84,3 +84,14 @@ model StarDict {
   createdAt DateTime             @default(now())
   updatedAt DateTime             @updatedAt
 }
+
+
+model ApiRequest {
+  id        String   @id @default(uuid())
+  url       String
+  method    String
+  body      String?
+  headers   String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

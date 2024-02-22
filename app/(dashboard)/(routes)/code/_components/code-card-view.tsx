@@ -28,14 +28,14 @@ export const CodeCardView = ({ codes }: CodeCardViewProps) => {
   };
 
   // 用Grid布局可以设置行列数，因为我们一页是15个元素，所以就是3行5列
-  const gridViewClass = "grid grid-cols-5 grid-rows-3 gap-4 max-w-screen-xl"
+  const gridViewClass = "grid grid-cols-1 grid-rows-15 gap-5 md:grid md:grid-cols-5 md:grid-rows-3 md:gap-4 max-w-screen-xl"
   const listViewClass = "flex flex-row flex-wrap max-w-[1200px] gap-3 p-2"
 
   return (
     <div className={gridViewClass}>
       {codes.map((code) => (
         <div key={code.id}>
-          <Card className="cursor-pointer">
+          <Card className="cursor-pointer min-w-fit">
             <CardHeader>
               <CardDescription>{code.title || "Unnamed"}</CardDescription>
             </CardHeader>

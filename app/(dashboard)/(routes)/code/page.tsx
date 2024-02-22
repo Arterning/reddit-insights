@@ -6,6 +6,7 @@ import { getCodeSnippets } from "@/app/action/code";
 import { CodeCardView } from "@/app/(dashboard)/(routes)/code/_components/code-card-view";
 import Pagination from "@/components/pagination";
 import { LangButton } from "./_components/lang-button";
+import SearchField from "@/components/search";
 
 const CodePage = async ({ searchParams }) => {
   const q = searchParams?.q || "";
@@ -13,7 +14,11 @@ const CodePage = async ({ searchParams }) => {
   const language = searchParams?.language;
   const pageSize = 15;
 
-  const { data: codes, count, lang } = await getCodeSnippets(q, page, pageSize, language);
+  const {
+    data: codes,
+    count,
+    lang,
+  } = await getCodeSnippets(q, page, pageSize, language);
 
   return (
     <div>
@@ -30,16 +35,21 @@ const CodePage = async ({ searchParams }) => {
         </Link>
 
         <div className="flex gap-2">
-          <LangButton key={"all"} language={"All"} count={count}/>
+          <SearchField placeholder="Search for a code..." />
+          <LangButton key={"all"} language={"All"} count={count} />
           {lang.map((lang) => (
-            <LangButton key={lang.language} language={lang.language} count={lang._count.language}/>
+            <LangButton
+              key={lang.language}
+              language={lang.language}
+              count={lang._count.language}
+            />
           ))}
         </div>
 
         <CodeCardView codes={codes} />
 
         <div className="max-w-[1200px]">
-          <Pagination count={count} pageSize={pageSize}/>
+          <Pagination count={count} pageSize={pageSize} />
         </div>
       </div>
     </div>

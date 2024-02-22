@@ -27,8 +27,12 @@ export const CodeCardView = ({ codes }: CodeCardViewProps) => {
     codeCardModal.onOpen();
   };
 
+  // 用Grid布局可以设置行列数，因为我们一页是15个元素，所以就是3行5列
+  const gridViewClass = "grid grid-cols-5 grid-rows-3 gap-4 max-w-screen-xl"
+  const listViewClass = "flex flex-row flex-wrap max-w-[1200px] gap-3 p-2"
+
   return (
-    <div className={"flex flex-row flex-wrap max-w-[1200px] gap-3 p-2"}>
+    <div className={gridViewClass}>
       {codes.map((code) => (
         <div key={code.id}>
           <Card className="cursor-pointer">

@@ -24,7 +24,7 @@ const SearchField = ({ placeholder }) => {
     }, 100);
 
     return (
-        <div className="flex p-10">
+        <div className="flex">
             <Search />
             <input
                 type="text"

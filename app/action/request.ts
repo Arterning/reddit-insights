@@ -2,6 +2,8 @@
 
 import axios from "axios";
 import prisma from "@/lib/prismadb";
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
 export const saveRequest = async (url: string, method: string, body: any) => {
     
@@ -13,7 +15,19 @@ export const saveRequest = async (url: string, method: string, body: any) => {
         }
     })
 
-    return "Request saved"
+    revalidatePath("/test-api")
+
+}
+
+export const deleteRequest = async (id: string) => {
+
+    await prisma.apiRequest.delete({
+        where: {
+            id
+        }
+    })
+
+    revalidatePath("/test-api")
 }
 
 export const getAllRequests = async () => {

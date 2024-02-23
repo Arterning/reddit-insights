@@ -1,10 +1,10 @@
 import { Heading } from "@/components/heading";
 import { IceCream2Icon } from "lucide-react";
-import { RequestForm } from "./components/request-form";
 import { deleteRequest, getAllRequests } from "@/app/action/request";
-import { RequestItem } from "./components/request-item";
+import { RequestArea } from "./components/request-area";
 
 const SendApiRequestPage = async () => {
+  
   const requests = await getAllRequests();
 
   return (
@@ -17,17 +17,7 @@ const SendApiRequestPage = async () => {
         bgColor="bg-pink-700/10"
       />
 
-      <div className="p-6 flex gap-6">
-        <div className="max-w-xl w-92 flex flex-col gap-3">
-          {requests.map((request) => (
-            <RequestItem key={request.id} request={request} />
-          ))}
-        </div>
-
-        <div className="flex-1 h-full">
-          <RequestForm />
-        </div>
-      </div>
+      <RequestArea requests={requests}/>
     </div>
   );
 };

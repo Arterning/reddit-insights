@@ -13,22 +13,23 @@ import { useState } from "react";
 import { requestAPI, saveRequest } from "@/app/action/request";
 import { CopyBlock } from "react-code-blocks";
 import toast from "react-hot-toast";
+import { RequestType } from "./request-type";
 
 interface RequestFormProps {
-  initUrl?: string;
-  initMethod?: string;
+  request: RequestType;
+  setSelectedRequest: (request: RequestType) => void;
 }
 
-export const RequestForm = ({ initUrl, initMethod }: RequestFormProps) => {
-  const [url, setUrl] = useState<string>(initUrl);
-  const [method, setMethod] = useState<string>(initMethod);
+
+export const RequestForm = ({ request, setSelectedRequest }: RequestFormProps) => {
+  const { url, method } = request;
   const [response, setResponse] = useState<any>();
 
   return (
     <div>
       <div className="w-full flex gap-5">
         {/* Write Select Field can choose GET POST PUT DELETE */}
-        <Select value={method} onValueChange={(value) => setMethod(value)}>
+        <Select value={method} onValueChange={(value) => setSelectedRequest({ ...request, method: value })}>
           <SelectTrigger className="flex-1" value={method}>
             {method}
           </SelectTrigger>
@@ -41,9 +42,13 @@ export const RequestForm = ({ initUrl, initMethod }: RequestFormProps) => {
         </Select>
         <Input
           className="flex-2"
-          placeholder="url"
+          placeholder="request url"
           name="url"
-          onChange={(e) => setUrl(e.target.value)}
+          value={url}
+          onChange={(e) => {
+            setSelectedRequest({ ...request, url: e.target.value });
+          }}
+          // onChange={(e) => setUrl(e.target.value)}
         />
         <Button
           className="flex-1"
@@ -64,8 +69,8 @@ export const RequestForm = ({ initUrl, initMethod }: RequestFormProps) => {
         <Button
           className="flex-1"
           onClick={() => {
-            setUrl("");
-            setMethod("GET");
+            // setUrl("");
+            // setMethod("GET");
             setResponse(null);
           }}
         >

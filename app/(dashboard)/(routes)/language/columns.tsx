@@ -1,7 +1,5 @@
 import {ColumnDef} from "@tanstack/react-table";
 import {StarDict} from "@/app/(dashboard)/(routes)/language/page";
-import { MoreHorizontal } from "lucide-react"
- 
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
@@ -12,11 +10,23 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import toast from "react-hot-toast";
+import { ArrowUpDown, MoreHorizontal } from "lucide-react"
+
 
 export const columns: ColumnDef<StarDict>[] = [
     {
         accessorKey: "word",
-        header: "Word",
+        header: ({ column }) => {
+          return (
+            <Button
+              variant="ghost"
+              onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+            >
+              Word
+              <ArrowUpDown className="ml-2 h-4 w-4" />
+            </Button>
+          )
+        },
     },
     {
         accessorKey: "translation",

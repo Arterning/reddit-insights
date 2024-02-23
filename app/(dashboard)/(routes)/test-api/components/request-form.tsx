@@ -11,12 +11,17 @@ import {
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { requestAPI, saveRequest } from "@/app/action/request";
-import toast from "react-hot-toast";
 import { CopyBlock } from "react-code-blocks";
+import toast from "react-hot-toast";
 
-export const RequestForm = () => {
-  const [url, setUrl] = useState<string>("");
-  const [method, setMethod] = useState<string>("GET");
+interface RequestFormProps {
+  initUrl?: string;
+  initMethod?: string;
+}
+
+export const RequestForm = ({ initUrl, initMethod }: RequestFormProps) => {
+  const [url, setUrl] = useState<string>(initUrl);
+  const [method, setMethod] = useState<string>(initMethod);
   const [response, setResponse] = useState<any>();
 
   return (
@@ -44,12 +49,13 @@ export const RequestForm = () => {
           className="flex-1"
           onClick={async () => {
             try {
-              const response = await requestAPI(url, method, {});
               await saveRequest(url, method, {});
-              console.log(response);
-              setResponse(response);
+              const resp = await requestAPI(url, method, {});
+              setResponse(resp);
+              toast.success("Request sent");
             } catch (error) {
-              console.log(error);
+              setResponse(error);
+              toast.error("Request failed");
             }
           }}
         >

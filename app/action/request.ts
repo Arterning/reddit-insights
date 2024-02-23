@@ -7,6 +7,18 @@ import { redirect } from "next/navigation";
 
 export const saveRequest = async (url: string, method: string, body: any) => {
     
+
+    const data = await prisma.apiRequest.findMany({
+        where: {
+            url,
+            method
+        }
+    })
+
+    if (data.length > 0) {
+        return
+    }
+
     await prisma.apiRequest.create({
         data: {
             url,

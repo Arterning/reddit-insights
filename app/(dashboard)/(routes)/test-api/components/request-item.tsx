@@ -1,7 +1,7 @@
 "use client";
 
 import { deleteRequest } from "@/app/action/request";
-import { Delete, MoreHorizontal, Pencil } from "lucide-react";
+import { Trash, MoreHorizontal, Pencil } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -35,14 +35,13 @@ export const RequestItem = ({ request }) => {
                 <Pencil className="h-4 w-4 mr-2" />
                 Edit
               </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Delete
-                  className="h-4 w-4 mr-2"
-                  onClick={async () => {
+              <DropdownMenuItem onClick={async () => {
                     await deleteRequest(request.id);
                     toast.success("Request deleted");
-                  }}
-                />
+                  }}>
+                <Trash
+                  className="h-4 w-4 mr-2"
+                ></Trash>
                 Delete
               </DropdownMenuItem>
             </DropdownMenuContent>

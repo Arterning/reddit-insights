@@ -5,8 +5,23 @@ import prisma from "@/lib/prismadb";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
-export const saveRequest = async (url: string, method: string, body: any) => {
+export const saveRequest = async (id : string, url: string, method: string, body: any) => {
     
+    if (id) {
+        await prisma.apiRequest.update({
+            where: {
+                id
+            },
+            data: {
+                url,
+                method,
+                body: JSON.stringify(body)
+            }
+        })
+
+        revalidatePath("/test-api")
+
+    }
 
     const data = await prisma.apiRequest.findMany({
         where: {

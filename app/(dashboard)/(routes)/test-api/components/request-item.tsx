@@ -13,15 +13,14 @@ import toast from "react-hot-toast";
 
 export const RequestItem = ({ request, setSelectedRequest }) => {
   return (
-    <div className="p-2 border border-gray-300 rounded-lg" key={request.id}>
+    <div
+      className="p-2 border border-gray-300 rounded-lg cursor-pointer"
+      key={request.id}
+      onClick={() => setSelectedRequest(request)}
+    >
       <div className="flex justify-between flex-nowrap max-w-md">
         <div>
-          <div
-            className="text-sm text-gray-500 cursor-pointer"
-            onClick={() => setSelectedRequest(request)}
-          >
-            {request.method}
-          </div>
+          <div className="text-sm text-gray-500">{request.method}</div>
           <div className="text-sm text-gray-500 whitespace-nowrap overflow-hidden overflow-ellipsis">
             {request.url}
           </div>
@@ -36,7 +35,7 @@ export const RequestItem = ({ request, setSelectedRequest }) => {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <DropdownMenuItem>
+              <DropdownMenuItem onClick={() => setSelectedRequest(request)}>
                 <Pencil className="h-4 w-4 mr-2" />
                 Edit
               </DropdownMenuItem>

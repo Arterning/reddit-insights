@@ -22,7 +22,7 @@ interface RequestFormProps {
 
 
 export const RequestForm = ({ request, setSelectedRequest }: RequestFormProps) => {
-  const { url, method } = request;
+  const { id, url, method } = request;
   const [response, setResponse] = useState<any>();
 
   return (
@@ -54,7 +54,7 @@ export const RequestForm = ({ request, setSelectedRequest }: RequestFormProps) =
           className="flex-1"
           onClick={async () => {
             try {
-              await saveRequest(url, method, {});
+              await saveRequest(id, url, method, {});
               const resp = await requestAPI(url, method, {});
               setResponse(resp);
               toast.success("Request sent");
@@ -69,9 +69,10 @@ export const RequestForm = ({ request, setSelectedRequest }: RequestFormProps) =
         <Button
           className="flex-1"
           onClick={() => {
-            // setUrl("");
-            // setMethod("GET");
-            setResponse(null);
+            setSelectedRequest({ ...request, url: "", method: "GET" });
+            setResponse({
+
+            });
           }}
         >
           Clear

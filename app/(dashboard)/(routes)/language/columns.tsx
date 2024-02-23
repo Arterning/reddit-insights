@@ -12,6 +12,7 @@ import {
 import toast from "react-hot-toast";
 import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
+import { ReactNode } from "react";
 
 export const columns: ColumnDef<StarDict>[] = [
   {
@@ -62,7 +63,7 @@ export const columns: ColumnDef<StarDict>[] = [
     accessorKey: "frq",
     header: () => <div className="text-right">Frequency</div>,
     cell: ({ row }) => {
-      const value = row.getValue("frq");
+      const value: ReactNode = row.getValue("frq");
       return <div className="text-right font-medium">{value}</div>;
     },
   },

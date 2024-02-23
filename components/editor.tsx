@@ -15,7 +15,7 @@ export const GeniusEditor = ({
   editable,
 }: EditorProps) => {
   // Stores the editor's contents as an array of Block objects.
-  const [blocks, setBlocks] = useState<Block[] | null>(null);
+  const [blocks, setBlocks] = useState(null);
 
   const handleUpload = async (file: File) => {
     console.log(file.name);

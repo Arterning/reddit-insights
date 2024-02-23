@@ -9,20 +9,18 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { useCodeCardModal } from "@/hooks/use-code-card-modal";
+import { CodeSnippet, useCodeCardModal } from "@/hooks/use-code-card-modal";
 import Link from "next/link";
 
-import { CopyBlock, dracula } from "react-code-blocks";
-import toast from "react-hot-toast";
 
 interface CodeCardViewProps {
-  codes: Record<string, any>[];
+  codes: CodeSnippet[];
 }
 
 export const CodeCardView = ({ codes }: CodeCardViewProps) => {
   const codeCardModal = useCodeCardModal();
 
-  const handleOnClick = (code: Record<string, any>) => {
+  const handleOnClick = (code: CodeSnippet) => {
     codeCardModal.setCode(code);
     codeCardModal.onOpen();
   };

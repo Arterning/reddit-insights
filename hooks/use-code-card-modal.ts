@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 
-interface CodeSnippet {
+export interface CodeSnippet {
+    id: string;
     title: string;
     language: string;
     body: string;
@@ -12,7 +13,7 @@ interface useCodeCardStore {
     onClose: () => void;
 
     code: CodeSnippet;
-    setCode: (code: Record<string, any>) => void;
+    setCode: (code: CodeSnippet) => void;
 }
 
 export const useCodeCardModal = create<useCodeCardStore>((set) => ({
@@ -20,6 +21,7 @@ export const useCodeCardModal = create<useCodeCardStore>((set) => ({
     onOpen: () => set({ isOpen: true }),
     onClose: () => set({ isOpen: false }),
     code: {
+        id: "",
         title: "",
         language: "",
         body: ""

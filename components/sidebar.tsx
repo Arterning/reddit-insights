@@ -19,6 +19,12 @@ const routes = [
     color: "text-sky-500"
   },
   {
+    label: 'Language',
+    icon: Languages,
+    color: "text-red-500",
+    href: '/language',
+  },
+  {
     label: 'Note',
     icon: StickyNote,
     color: "text-green-700",
@@ -35,12 +41,6 @@ const routes = [
     icon: Code,
     color: "text-yellow-500",
     href: '/code',
-  },
-  {
-    label: 'Language',
-    icon: Languages,
-    color: "text-red-500",
-    href: '/language',
   },
   {
     label: 'API',

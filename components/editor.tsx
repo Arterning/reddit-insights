@@ -1,16 +1,22 @@
-'use client';
+"use client";
 
-import { BlockNoteEditor, PartialBlock } from "@blocknote/core";
+import { useState } from "react";
+import { BlockNoteEditor, Block } from "@blocknote/core";
 import { BlockNoteView, useBlockNote } from "@blocknote/react";
 import "@blocknote/react/style.css";
 
 interface EditorProps {
-  onChange: (value: string) => void;
   initialContent?: string;
   editable?: boolean;
 }
 
-export const GeniusEditor = ({ onChange, initialContent, editable }: EditorProps) => {
+export const GeniusEditor = ({
+  initialContent,
+  editable,
+}: EditorProps) => {
+  // Stores the editor's contents as an array of Block objects.
+  const [blocks, setBlocks] = useState<Block[] | null>(null);
+
   const handleUpload = async (file: File) => {
     console.log(file.name);
     return Promise.resolve(`https://someurl.com/${file.name}`);
@@ -19,11 +25,8 @@ export const GeniusEditor = ({ onChange, initialContent, editable }: EditorProps
   // Creates a new editor instance.
   const editor: BlockNoteEditor = useBlockNote({
     editable,
-    // initialContent: initialContent
-    //   ? (JSON.parse(initialContent))
-    //   : undefined,
     onEditorContentChange: (editor) => {
-      onChange(JSON.stringify(editor.topLevelBlocks, null, 2));
+      setBlocks(editor.topLevelBlocks)
     },
     uploadFile: handleUpload,
   });
@@ -31,10 +34,7 @@ export const GeniusEditor = ({ onChange, initialContent, editable }: EditorProps
   // Renders the editor instance using a React component.
   return (
     <div className="">
-      <BlockNoteView
-        editor={editor}
-        theme="dark"
-      />
+      <BlockNoteView editor={editor} theme="dark" />
     </div>
-  )
+  );
 };

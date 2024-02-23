@@ -16,7 +16,6 @@ function RichTextPage() {
       />
       <div className="w-full h-screen p-4">
         <GeniusEditor
-          onChange={() => {}}
           initialContent="good"
           editable={true}
         />

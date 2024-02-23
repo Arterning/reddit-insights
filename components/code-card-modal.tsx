@@ -29,7 +29,7 @@ export const CodeCardModal = () => {
     return (
         <Dialog open={codeCardModal.isOpen} onOpenChange={codeCardModal.onClose}>
             <DialogContent>
-                <DialogHeader className="w-auto">
+                <DialogHeader>
                     <DialogTitle className="flex justify-center items-center flex-col gap-y-4 pb-2">
                         {codeCardModal.code.title || "Unnamed"}
                     </DialogTitle>

@@ -20,53 +20,54 @@ export const RequestForm = () => {
   const [response, setResponse] = useState<any>();
 
   return (
-    <>
-      {/* Write Select Field can choose GET POST PUT DELETE */}
-      <Select value={method} onValueChange={(value) => setMethod(value)}>
-        <SelectTrigger className="flex-1" value={method}>
-          {method}
-        </SelectTrigger>
-        <SelectContent>
-          <SelectItem value="GET">GET</SelectItem>
-          <SelectItem value="POST">POST</SelectItem>
-          <SelectItem value="PUT">PUT</SelectItem>
-          <SelectItem value="DELETE">DELETE</SelectItem>
-        </SelectContent>
-      </Select>
-      <Input
-        className="flex-2"
-        placeholder="url"
-        name="url"
-        onChange={(e) => setUrl(e.target.value)}
-      />
-      <Button
-        className="flex-1"
-        onClick={async () => {
-          try {
-            const response = await requestAPI(url, method, {});
-            console.log(response);
-            setResponse(response);
-          } catch (error) {
-            console.log(error);
-          }
-        }}
-      >
-        Send
-      </Button>
-      <Button
-        className="flex-1"
-        onClick={async () => {
-          await saveRequest(url, method, {});
-          toast.success("Request saved");
-        }}
-      >
-        Save
-      </Button>
-
-      <div className="container mx-auto py-10">
-        {/* Result Area of API */}
-        <CopyBlock text={JSON.stringify(response, null, 2)} language={"json"} />
+    <div>
+      <div className="w-full flex gap-5">
+        {/* Write Select Field can choose GET POST PUT DELETE */}
+        <Select value={method} onValueChange={(value) => setMethod(value)}>
+          <SelectTrigger className="flex-1" value={method}>
+            {method}
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="GET">GET</SelectItem>
+            <SelectItem value="POST">POST</SelectItem>
+            <SelectItem value="PUT">PUT</SelectItem>
+            <SelectItem value="DELETE">DELETE</SelectItem>
+          </SelectContent>
+        </Select>
+        <Input
+          className="flex-2"
+          placeholder="url"
+          name="url"
+          onChange={(e) => setUrl(e.target.value)}
+        />
+        <Button
+          className="flex-1"
+          onClick={async () => {
+            try {
+              const response = await requestAPI(url, method, {});
+              await saveRequest(url, method, {});
+              console.log(response);
+              setResponse(response);
+            } catch (error) {
+              console.log(error);
+            }
+          }}
+        >
+          Send
+        </Button>
+        <Button
+          className="flex-1"
+          onClick={() => {
+            setUrl("");
+            setMethod("GET");
+            setResponse(null);
+          }}
+        >
+          Clear
+        </Button>
       </div>
-    </>
+
+      <CopyBlock text={JSON.stringify(response, null, 2)} language={"json"} />
+    </div>
   );
 };

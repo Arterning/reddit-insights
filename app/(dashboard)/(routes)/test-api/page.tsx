@@ -17,18 +17,15 @@ const SendApiRequestPage = async () => {
         bgColor="bg-pink-700/10"
       />
 
-      <div className="p-6 flex">
-        <div className="flex-1 gap-3">
+      <div className="p-6 flex gap-6">
+        <div className="max-w-xl w-92 flex flex-col gap-3">
           {requests.map((request) => (
             <RequestItem key={request.id} request={request} />
           ))}
         </div>
 
-        <div className="flex-2">
-          <div className="w-full flex gap-5 p-5">
-            {/* Write Select Field can choose GET POST PUT DELETE */}
-            <RequestForm />
-          </div>
+        <div className="flex-1 h-full">
+          <RequestForm />
         </div>
       </div>
     </div>

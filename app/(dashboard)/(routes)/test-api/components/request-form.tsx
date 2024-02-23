@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Select } from "@/components/ui/select";
-
+import Editor from "@monaco-editor/react";
 import {
   SelectContent,
   SelectItem,
@@ -79,7 +79,14 @@ export const RequestForm = ({ request, setSelectedRequest }: RequestFormProps) =
         </Button>
       </div>
 
-      <CopyBlock text={JSON.stringify(response, null, 2)} language={"json"} />
+      <div className="w-full mt-8">
+        <Editor
+            height="500px"
+            language={"json"}
+            value={JSON.stringify(response, null, 2)}
+            theme="vs-dark"
+          />
+      </div>
     </div>
   );
 };

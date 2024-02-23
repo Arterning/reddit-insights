@@ -15,7 +15,7 @@ export const createNote = async (formData) => {
     await prisma.note.create({
         data: {
             userId,
-            title: title ? title: 'New Note',
+            title: title ? title: body.slice(0, 10),
             type: 'note',
             body,
         }

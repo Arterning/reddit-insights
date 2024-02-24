@@ -7,6 +7,18 @@ import toast from "react-hot-toast";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "./ui/alert-dialog";
+
 export default function Chirp({ chirp }) {
   const [editing, setEditing] = useState(false);
   const [isDeleted, setIsDeleted] = useState(false);
@@ -68,7 +80,9 @@ export default function Chirp({ chirp }) {
               <Button size="sm" type={"submit"} onClick={updateChirp}>
                 Update
               </Button>
-              <Button variant="link" onClick={() => setEditing(false)}>Cancel</Button>
+              <Button variant="link" onClick={() => setEditing(false)}>
+                Cancel
+              </Button>
             </div>
             <Input
               name="title"
@@ -102,9 +116,36 @@ export default function Chirp({ chirp }) {
               </Button>
             </div>
             <div>
-              <Button size="sm" variant="destructive" onClick={deleteChirp}>
-                Delete
-              </Button>
+              <AlertDialog>
+                <AlertDialogTrigger asChild>
+                  <Button size="sm" variant="destructive">
+                    Delete
+                  </Button>
+                </AlertDialogTrigger>
+                <AlertDialogContent>
+                  <AlertDialogHeader>
+                    <AlertDialogTitle>
+                      Are you absolutely sure?
+                    </AlertDialogTitle>
+                    <AlertDialogDescription>
+                      This action cannot be undone. After Delete you will not be
+                      able to view this note. <br />
+                      <br />
+                    </AlertDialogDescription>
+                    <AlertDialogFooter>
+                      <AlertDialogCancel>Cancel</AlertDialogCancel>
+                      <AlertDialogAction
+                        onClick={(e) => {
+                          deleteChirp();
+                          e.preventDefault();
+                        }}
+                      >
+                        Proceed{" "}
+                      </AlertDialogAction>
+                    </AlertDialogFooter>
+                  </AlertDialogHeader>
+                </AlertDialogContent>
+              </AlertDialog>
             </div>
           </div>
           <pre className="mt-4 text-lg text-gray-900 whitespace-pre-wrap font-semibold">

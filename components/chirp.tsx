@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useTransition } from "react";
 import { Button } from "./ui/button";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -25,6 +25,10 @@ export default function Chirp({ chirp }) {
 
   const [title, setTitle] = useState(chirp.title);
   const [body, setBody] = useState(chirp.body);
+
+
+  const [isPending, startTransition] = useTransition();
+
 
   const deleteChirp = async () => {
     try {
@@ -77,7 +81,9 @@ export default function Chirp({ chirp }) {
         <div className="flex-1">
           <form className="space-y-3">
             <div className="flex justify-between items-center">
-              <Button size="sm" type={"submit"} onClick={updateChirp}>
+              <Button size="sm" type={"submit"} disabled={isPending} onClick={(e) => {
+                startTransition(() => updateChirp(e));
+              }}>
                 Update
               </Button>
               <Button variant="link" onClick={() => setEditing(false)}>
@@ -118,7 +124,7 @@ export default function Chirp({ chirp }) {
             <div>
               <AlertDialog>
                 <AlertDialogTrigger asChild>
-                  <Button size="sm" variant="destructive">
+                  <Button size="sm" variant="destructive" disabled={isPending}>
                     Delete
                   </Button>
                 </AlertDialogTrigger>
@@ -136,8 +142,7 @@ export default function Chirp({ chirp }) {
                       <AlertDialogCancel>Cancel</AlertDialogCancel>
                       <AlertDialogAction
                         onClick={(e) => {
-                          deleteChirp();
-                          e.preventDefault();
+                          startTransition(() => deleteChirp());
                         }}
                       >
                         Proceed{" "}

@@ -2,62 +2,77 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Montserrat } from 'next/font/google'
-import { Code, LayoutDashboard, StickyNote, Languages, Edit3Icon,  Settings, IceCream2Icon } from "lucide-react";
+import { Montserrat } from "next/font/google";
+import {
+  Code,
+  LayoutDashboard,
+  StickyNote,
+  Languages,
+  Edit3Icon,
+  Settings,
+  IceCream2Icon,
+  LinkIcon,
+} from "lucide-react";
 import { usePathname } from "next/navigation";
 
 import { cn } from "@/lib/utils";
 import { FreeCounter } from "@/components/free-counter";
 
-const poppins = Montserrat ({ weight: '600', subsets: ['latin'] });
+const poppins = Montserrat({ weight: "600", subsets: ["latin"] });
 
 const routes = [
   {
-    label: 'Dashboard',
+    label: "Dashboard",
     icon: LayoutDashboard,
-    href: '/dashboard',
-    color: "text-sky-500"
+    href: "/dashboard",
+    color: "text-sky-500",
   },
   {
-    label: 'Language',
+    label: "Language",
     icon: Languages,
     color: "text-red-500",
-    href: '/language',
+    href: "/language",
   },
   {
-    label: 'Note',
+    label: "Shortlink",
+    icon: LinkIcon,
+    color: "text-red-500",
+    href: "/shortlink",
+  },
+  {
+    label: "Note",
     icon: StickyNote,
     color: "text-green-700",
-    href: '/note',
+    href: "/note",
   },
   {
-    label: 'Text',
+    label: "Text",
     icon: Edit3Icon,
     color: "text-indigo-500",
-    href: '/rich-text',
+    href: "/rich-text",
   },
   {
-    label: 'Code',
+    label: "Code",
     icon: Code,
     color: "text-yellow-500",
-    href: '/code',
+    href: "/code",
   },
   {
-    label: 'API',
+    label: "API",
     icon: IceCream2Icon,
     color: "text-pink-500",
-    href: '/test-api',
+    href: "/test-api",
   },
   {
-    label: 'Settings',
+    label: "Settings",
     icon: Settings,
-    href: '/settings',
+    href: "/settings",
   },
 ];
 
 export const Sidebar = ({
   apiLimitCount = 0,
-  isPro = false
+  isPro = false,
 }: {
   apiLimitCount: number;
   isPro: boolean;
@@ -82,7 +97,9 @@ export const Sidebar = ({
               href={route.href}
               className={cn(
                 "text-sm group flex p-3 w-full justify-start font-medium cursor-pointer hover:text-white hover:bg-white/10 rounded-lg transition",
-                pathname === route.href ? "text-white bg-white/10" : "text-zinc-400",
+                pathname === route.href
+                  ? "text-white bg-white/10"
+                  : "text-zinc-400"
               )}
             >
               <div className="flex items-center flex-1">
@@ -93,10 +110,7 @@ export const Sidebar = ({
           ))}
         </div>
       </div>
-      <FreeCounter
-        apiLimitCount={apiLimitCount}
-        isPro={isPro}
-      />
+      <FreeCounter apiLimitCount={apiLimitCount} isPro={isPro} />
     </div>
   );
 };

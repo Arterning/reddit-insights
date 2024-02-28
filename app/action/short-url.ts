@@ -5,6 +5,19 @@ import {revalidatePath} from "next/cache";
 import {redirect} from "next/navigation";
 import * as  base62 from "base62/lib/ascii";
 
+export const getShortUrlMap = async () => {
+    
+    const data = await prisma.shortUrlMap.findMany({
+        orderBy: {
+            createdAt: 'desc'
+        }
+    });
+
+    return data;
+}
+
+
+
 export const getLongUrl = async (code: string) => {
     
     const data = await prisma.shortUrlMap.findUnique({
@@ -46,15 +59,15 @@ export const createShortUrl = async (formData) => {
             status: 1
         }
     })
-    revalidatePath("/shortlink");
-    redirect("/shortlink");
+    revalidatePath("/short-url");
+    redirect("/short-url");
 
 }
 
 
 export const generateCode = async () => {
     
-    let str = generateRandomStr(6);
+    let str = await generateRandomStr(6);
 
     const data = await prisma.uniqueCode.findUnique({
         where: {
@@ -79,7 +92,7 @@ export const generateCode = async () => {
 }
 
 
-export function generateRandomStr(len: number) {
+export async function generateRandomStr(len: number) {
     let str = '';
     for(let i = 0; i < len; i++) {
         const num = Math.floor(Math.random() * 62);

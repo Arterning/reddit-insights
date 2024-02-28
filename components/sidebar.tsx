@@ -34,10 +34,10 @@ const routes = [
     href: "/language",
   },
   {
-    label: "Shortlink",
+    label: "ShortURL",
     icon: LinkIcon,
     color: "text-red-500",
-    href: "/shortlink",
+    href: "/short-url",
   },
   {
     label: "Note",

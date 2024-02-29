@@ -29,8 +29,9 @@ const ShortUrlPage = async () => {
         </div>
         <div className="bg-white shadow-sm rounded-lg divide-y flex-1">
           {urlMaps.map((urlMap) => (
-            <div key={urlMap.id} className="p-5">
+            <div key={urlMap.id} className="p-5 flex justify-between">
               <Link href={`${urlMap.longUrl}`}>{urlMap.code}</Link>
+              <a href={`http://localhost:3000/api/short-url/${urlMap.code}`}>{urlMap.code}</a>
             </div>
           ))}
         </div>
